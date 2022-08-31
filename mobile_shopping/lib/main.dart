@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mobile_shopping/screens/home.dart';
+import 'package:mobile_shopping/screens/login/login_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -31,8 +32,8 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.white,
           primaryColor: Colors.white,
         ),
-        //home: const LoginScreen(),
-        home: const HomeScreen(),
+        home: const LoginScreen(),
+        // home: const HomeScreen(),
       ),
     );
   }

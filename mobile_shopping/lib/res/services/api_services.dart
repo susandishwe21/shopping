@@ -1,8 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:mobile_shopping/res/models/order.dart';
 import 'package:mobile_shopping/res/models/product.dart';
 import 'package:mobile_shopping/res/models/shop.dart';
 import 'package:mobile_shopping/res/system_data.dart';
@@ -15,7 +15,8 @@ String baseUrl = 'https://assessment-api.hivestage.com/api/';
 /*
   Post Login Data 
 */
-Future<void> verifyLogin(String email, String password) async {
+Future<void> verifyLogin(
+    BuildContext context, String email, String password) async {
   var client = http.Client();
   try {
     var response = await client.post(
@@ -33,9 +34,11 @@ Future<void> verifyLogin(String email, String password) async {
     if (response.statusCode == 200) {
       var result = jsonDecode(response.body)['token'];
       apiToken = result;
-
       Get.to(() => HomeScreen());
-    } else {}
+    } else {
+      var data = jsonDecode(response.body)['message'];
+      showCustomSnack(context, data.toString());
+    }
   } catch (e) {}
 }
 
@@ -45,7 +48,6 @@ Future<void> verifyLogin(String email, String password) async {
 Future<List<Product>> getAllProducts(int limit, int page) async {
   List<Product> productList = [];
   var client = http.Client();
-  print('${baseUrl}products?page=$page&size=$limit');
   try {
     var response = await client.get(
         Uri.parse(
@@ -91,7 +93,7 @@ Future<void> postCheckOut(List<Shop> shopList) async {
       "lineTotal": 0
     });
   }
-  print(orderList);
+
   var data = {'orderEntries': orderList, 'subTotal': 0, 'tax': 0, 'total': 0};
 
   try {
