@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:mobile_shopping/res/models/product.dart';
 import 'package:mobile_shopping/res/models/shop.dart';
 import 'package:mobile_shopping/res/services/api_services.dart';
+import 'package:mobile_shopping/res/system_data.dart';
 import 'package:mobile_shopping/res/values.dart';
 import 'package:mobile_shopping/screens/products/add_product_cart_screen.dart';
 import 'package:mobile_shopping/screens/products/product_detail_screen.dart';
@@ -20,8 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int limit = 6;
   Rx<bool> xLoaded = false.obs;
   Rx<int> page = 1.obs;
-  Rx<List<Shop>> shopList = Rx<List<Shop>>([]);
-  Rx<bool> isChecked = false.obs;
 
   @override
   void initState() {
@@ -205,11 +204,9 @@ class _HomeScreenState extends State<HomeScreen> {
               return GestureDetector(
                 onTap: () {
                   Get.to(() => ProductDetailScreen(
-                        name: allProductsList.value[index].name,
-                        image: allProductsList.value[index].image,
-                        description: allProductsList.value[index].description,
-                        qty: '0',
+                        product: allProductsList.value[index],
                       ));
+                  shopList.refresh();
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -268,7 +265,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 allProductsList.value[index],
                                             qty: 1);
 
-                                        addProduct(shop);
+                                        addProduct(shop, isChecked: isChecked);
                                       },
                                       icon: const Icon(
                                         Icons.add,
@@ -288,24 +285,5 @@ class _HomeScreenState extends State<HomeScreen> {
             }),
       ),
     );
-  }
-
-/*
-Add Product To Cart
-*/
-  addProduct(Shop shop) {
-    isChecked.value = true;
-    Rx<int> index =
-        shopList.value.indexWhere((element) => element.id == shop.id).obs;
-
-    if (index.value > -1) {
-      shopList.value[index.value].qty += 1;
-      isChecked.value = false;
-      print("Already Exit");
-    } else {
-      shopList.value.add(shop);
-      isChecked.value = false;
-      print("New...........");
-    }
   }
 }
