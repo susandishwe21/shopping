@@ -102,8 +102,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       visibleToggle();
                     },
                     icon: !obscureText
-                        ? Icon(Icons.visibility)
-                        : Icon(Icons.visibility_off))),
+                        ? Icon(
+                            Icons.visibility,
+                            color: ShoppingColor().secondaryColor,
+                          )
+                        : Icon(
+                            Icons.visibility_off,
+                            color: ShoppingColor().secondaryColor,
+                          ))),
           ),
           const SizedBox(
             height: 25,

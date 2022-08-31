@@ -176,7 +176,11 @@ class _AddToCartScreenState extends State<AddToCartScreen> {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             primary: ShoppingColor().primaryColor),
         onPressed: () async {
-          await postCheckOut(widget.shop);
+          if (widget.shop.isNotEmpty) {
+            await postCheckOut(widget.shop);
+          } else {
+            showCustomSnack(context, "Please add product to cart");
+          }
         },
         child: Text("CheckOut"),
       ),

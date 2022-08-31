@@ -80,6 +80,9 @@ Future<List<Product>> getAllProducts(int limit, int page) async {
   return productList;
 }
 
+/*
+  fetch order checkout api
+*/
 Future<void> postCheckOut(List<Shop> shopList) async {
   var client = http.Client();
 
@@ -111,7 +114,7 @@ Future<void> postCheckOut(List<Shop> shopList) async {
     if (response.statusCode == 200) {
       shopList.clear();
       totalCost.value = 0;
-      Get.to(() => const CheckOutSuccessPage());
+      Get.off(() => const CheckOutSuccessPage());
     } else {}
   } catch (e) {}
 }

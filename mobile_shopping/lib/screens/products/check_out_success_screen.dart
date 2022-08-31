@@ -18,13 +18,13 @@ class _CheckOutSuccessPageState extends State<CheckOutSuccessPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Get.to(() => HomeScreen());
+        Get.off(() => HomeScreen());
         return true;
       },
       child: Scaffold(
         body: GestureDetector(
           onTap: () {
-            Get.to(() => HomeScreen());
+            Get.off(() => HomeScreen());
           },
           child: Container(
             width: screenWidth(context),
