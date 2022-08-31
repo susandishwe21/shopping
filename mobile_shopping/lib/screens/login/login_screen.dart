@@ -127,6 +127,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       txtPasswordController.text.isEmpty) {
                     showCustomSnack(context, 'Please Fill Email and Password',
                         bgColor: Colors.red);
+                  } else if (txtEmailController.text.isEmpty) {
+                    showCustomSnack(context, 'Please Fill Email',
+                        bgColor: Colors.red);
+                  } else if (txtPasswordController.text.isEmpty) {
+                    showCustomSnack(context, 'Please Fill Password',
+                        bgColor: Colors.red);
                   } else {
                     await verifyLogin(context, txtEmailController.text,
                         txtPasswordController.text);
