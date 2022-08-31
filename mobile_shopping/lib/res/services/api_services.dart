@@ -55,9 +55,7 @@ Future<List<Product>> getAllProducts(int limit, int page) async {
         ),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          //'Authorization': 'Bearer $apiToken',
-          'Authorization':
-              'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdSIsImF1dGgiOiJST0xFX1VTRVIiLCJpYXQiOjE2NjE3OTM3MDQsImV4cCI6MTY2MjM5ODUwNH0.KHEr7eEBG1YUHoZTwM2hGQhbvFXH_aTna_fcnAx0AgXPuMn88bmj_JX34odsKUok1QZooZszyra1oCKvl_uaFw'
+          'Authorization': 'Bearer $apiToken',
         });
     print(response.statusCode);
     if (response.statusCode == 200) {
@@ -106,8 +104,7 @@ Future<void> postCheckOut(List<Shop> shopList) async {
         ),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization':
-              'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdSIsImF1dGgiOiJST0xFX1VTRVIiLCJpYXQiOjE2NjE3OTM3MDQsImV4cCI6MTY2MjM5ODUwNH0.KHEr7eEBG1YUHoZTwM2hGQhbvFXH_aTna_fcnAx0AgXPuMn88bmj_JX34odsKUok1QZooZszyra1oCKvl_uaFw'
+          'Authorization': 'Bearer $apiToken',
         },
         body: jsonEncode(data));
     print(response.statusCode);
